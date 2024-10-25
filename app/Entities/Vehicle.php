@@ -2,10 +2,9 @@
 
 namespace App\Entities;
 
-abstract class Vehicle
+class Vehicle
 {
     private float $price;
-
     private Type $type;
 
     public function __construct(float $price, Type $type)
@@ -19,8 +18,8 @@ abstract class Vehicle
         return $this->price;
     }
 
-    public function getType(): string
+    public function getType(): Type
     {
-        return $this->type->getType();
+        return $this->type;
     }
 }

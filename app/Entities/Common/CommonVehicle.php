@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Entities;
+namespace App\Entities\Common;
+
+use App\Entities\Vehicle;
 
 class CommonVehicle extends Vehicle
 {

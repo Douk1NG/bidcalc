@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Entities;
+namespace App\Entities\Common;
+
+use App\Entities\Type;
 
 class CommonType extends Type
 {
@@ -8,4 +10,9 @@ class CommonType extends Type
     {
         $this->type = 'common';
     }
+    public function get(): string
+    {
+        return $this->type;
+    }
+
 }

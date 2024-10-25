@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Entities;
+namespace App\Entities\Luxury;
+
+use App\Entities\Vehicle;
 
 class LuxuryVehicle extends Vehicle
 {
