@@ -15,7 +15,7 @@ class CommonFees extends Fees
     {
         $amount = $this->vehicle->getPrice();
         $basic = $this->basicBuyer($amount, 10, 50);
-        $special = $this->special($amount, 2);
+        $special = $this->special($amount, 0.02);
         $association = $this->association($amount);
         $storage = $this->storage($amount);
         $total = $amount + $basic + $special + $association + $storage;
@@ -25,7 +25,7 @@ class CommonFees extends Fees
             'special' => $special,
             'association' => $association,
             'storage' => $storage,
-            'total' => $total
+            'total' => $total,
         ];
     }
 }

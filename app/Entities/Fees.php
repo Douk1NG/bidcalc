@@ -4,7 +4,6 @@ namespace App\Entities;
 
 class Fees
 {
-
     protected function basicBuyer(float $amount, int $minimum, int $maximum): float
     {
         $fee = $amount * 0.10;
@@ -27,9 +26,9 @@ class Fees
         }
 
         $tresholds = [
-            500 => 5.0,
-            1000 => 10.0,
-            3000 => 15.0,
+            500 => 5,
+            1000 => 10,
+            3000 => 15,
         ];
 
         foreach ($tresholds as $threshold => $fee) {
@@ -38,7 +37,7 @@ class Fees
             }
         }
 
-        return 20.0;
+        return 20;
     }
 
     protected function storage(): float

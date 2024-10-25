@@ -4,7 +4,6 @@ namespace App\Entities;
 
 class LuxuryFees extends Fees
 {
-
     private LuxuryVehicle $vehicle;
 
     public function __construct(LuxuryVehicle $vehicle)
@@ -16,7 +15,7 @@ class LuxuryFees extends Fees
     {
         $amount = $this->vehicle->getPrice();
         $basic = $this->basicBuyer($amount, 25, 200);
-        $special = $this->special($amount, 4);
+        $special = $this->special($amount, 0.04);
         $association = $this->association($amount);
         $storage = $this->storage($amount);
         $total = $amount + $basic + $special + $association + $storage;
@@ -26,7 +25,7 @@ class LuxuryFees extends Fees
             'special' => $special,
             'association' => $association,
             'storage' => $storage,
-            'total' => $total
+            'total' => $total,
         ];
     }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\Bid;
+use Illuminate\Http\Request;
 
 class BidCalculationToolController extends Controller
 {
-
     private Bid $service;
 
     public function __construct(Bid $service)
@@ -22,7 +21,7 @@ class BidCalculationToolController extends Controller
             'type' => 'required|string',
         ]);
 
-        $result = $this->service->getCalculation($data['price'], $data['type']);
+        $result = $this->service->getFee($data['price'], $data['type']);
 
         return response()->json(['result' => $result]);
     }

@@ -2,11 +2,10 @@
 
 namespace App\Entities;
 
-use App\Entities\Type;
-
 abstract class Vehicle
 {
     private float $price;
+
     private Type $type;
 
     public function __construct(float $price, Type $type)

@@ -4,7 +4,7 @@ namespace App\Entities;
 
 abstract class Type
 {
-    private string $type;
+    public string $type;
 
     public function getType(): string
     {
