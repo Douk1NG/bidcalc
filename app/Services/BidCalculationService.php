@@ -38,8 +38,6 @@ class BidCalculationService
             )
         );
 
-
-
         if ($type === $commonVehicle->getType()->getName()) {
             $commonVehicle->setPrice($price);
             $fees = $calculator->calculateFees($commonVehicle);

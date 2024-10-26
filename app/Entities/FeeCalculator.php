@@ -7,9 +7,10 @@ class FeeCalculator extends Fees
 
     public function calculateFees(Vehicle $vehicle): array
     {
-        $maximum = $vehicle->getType()->getFeesTypes()->getMaximum();
-        $minimum = $vehicle->getType()->getFeesTypes()->getMinimum();
-        $percent = $vehicle->getType()->getFeesTypes()->getPercent();
+        $feeTypes = $vehicle->getType()->getFeesTypes();
+        $maximum = $feeTypes->getMaximum();
+        $minimum = $feeTypes->getMinimum();
+        $percent = $feeTypes->getPercent();
         $price = $vehicle->getPrice();
 
         $association = $this->AssociationFee($price);
