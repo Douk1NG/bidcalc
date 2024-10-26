@@ -22,4 +22,16 @@ class Vehicle
     {
         return $this->type;
     }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    public function setType(Type $type): self
+    {
+        $this->type = $type;
+        return $this;
+    }
 }

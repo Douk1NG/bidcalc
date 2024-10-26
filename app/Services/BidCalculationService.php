@@ -2,32 +2,64 @@
 
 namespace App\Services;
 
-use App\Entities\Common\CommonFees;
-use App\Entities\Common\CommonType;
-use App\Entities\Common\CommonVehicle;
-use App\Entities\Luxury\LuxuryFees;
-use App\Entities\Luxury\LuxuryType;
-use App\Entities\Luxury\LuxuryVehicle;
+use App\Entities\FeeCalculator;
+use App\Entities\Type;
+use App\Entities\Vehicle;
+use App\Entities\FeesTypes;
 
 class BidCalculationService
 {
     public function get(float $price, string $type): ?array
     {
-        $commonVehicleType = new CommonType;
-        $luxuryVehicleType = new LuxuryType;
+        $calculator = new FeeCalculator();
 
-        if ($type === $commonVehicleType->get()) {
-            $vehicle = new CommonVehicle($price);
-            $fees = new CommonFees($vehicle);
+        $commonVehicle = new Vehicle(
+            0,
+            new Type(
+                'common',
+                new FeesTypes(
+                    minimum: 10,
+                    maximum: 50,
+                    percent: 0.02
+                )
+            )
+        );
 
-            return $fees->get();
+        $luxuryVehicle = new Vehicle(
+            0,
+            new Type(
+                'luxury',
+                new FeesTypes(
+                    minimum: 25,
+                    maximum: 200,
+                    percent: 0.04
+
+                )
+            )
+        );
+
+
+
+        if ($type === $commonVehicle->getType()->getName()) {
+            $commonVehicle->setPrice($price);
+            $fees = $calculator->calculateFees($commonVehicle);
+            $total = $calculator->sumFees($fees) + $price;
+
+            return [
+                'fees' => $fees,
+                'total' => $total
+            ];
         }
 
-        if ($type === $luxuryVehicleType->get()) {
-            $luxury = new LuxuryVehicle($price);
-            $fees = new LuxuryFees($luxury);
+        if ($type === $luxuryVehicle->getType()->getName()) {
+            $luxuryVehicle->setPrice($price);
+            $fees = $calculator->calculateFees($luxuryVehicle);
+            $total = $calculator->sumFees($fees) + $price;
 
-            return $fees->get();
+            return [
+                'fees' => $fees,
+                'total' => $total
+            ];
         }
 
         return null;

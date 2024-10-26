@@ -2,23 +2,27 @@
 
 namespace App\Entities;
 
-class FeeCalculator
+class FeeCalculator extends Fees
 {
-    private $fees;
 
-    public function __construct(array $fees)
+    public function calculateFees(Vehicle $vehicle): array
     {
-        $this->fees = $fees;
-    }
+        $maximum = $vehicle->getType()->getFeesTypes()->getMaximum();
+        $minimum = $vehicle->getType()->getFeesTypes()->getMinimum();
+        $percent = $vehicle->getType()->getFeesTypes()->getPercent();
+        $price = $vehicle->getPrice();
 
-    public function calculateFees(): array
-    {
-        $results = [];
-        foreach ($this->fees as $fee) {
-            $className = (new \ReflectionClass($fee))->getShortName();
-            $results[$className] = $fee->calculate();
-        }
-        return $results;
+        $association = $this->AssociationFee($price);
+        $basic = $this->BasicBuyerFee($price, $minimum, $maximum);
+        $special = $this->SpecialFee($price, $percent);
+        $storage = $this->StorageFee();
+
+        return [
+            'Association' => $association,
+            'Basic' => $basic,
+            'Special' => $special,
+            'Storage' => $storage
+        ];
     }
 
     public function sumFees(array $fees): float
